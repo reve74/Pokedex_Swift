@@ -50,6 +50,21 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return pokemonList.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailViewController = UIStoryboard(name: "DetailViewController", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        
+//        let target = pokemonList[indexPath.row]
+
+        
+        detailViewController.pokemon = self.pokemonList[indexPath.row]
+        
+        print(detailViewController.pokemon!)
+        
+        self.present(detailViewController, animated: true) {
+        }
+
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell", for: indexPath) as! PokemonCell
@@ -59,7 +74,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.pokemonImageView?.image = img
         cell.nameLabel?.text = target.name
         cell.selectionStyle = .none
-        cell.numberLabel?.text = String(target.number)
+        cell.numberLabel?.text = "No.\(String(target.number))"
         cell.backgroundColor = UIColor.systemGray6
         
         return cell
