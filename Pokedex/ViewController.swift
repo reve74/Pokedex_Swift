@@ -8,43 +8,59 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    let pokemonList = Pokemon.data
+    
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
-            searchBar.placeholder = "Search"
-            searchBar.tintColor = UIColor.yellow
+            self.searchBar.searchBarStyle = .minimal
         }
     }
-    
     
     @IBOutlet weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
+            titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
         }
     }
     
-    @IBOutlet weak var pokemonTableView: UITableView!
+ 
+    @IBOutlet weak var pokemonTableView: UITableView! {
+        didSet {
+            pokemonTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+            pokemonTableView.delegate = self
+            pokemonTableView.dataSource = self
+            pokemonTableView.backgroundColor = UIColor.systemGray6
+        }
+    }
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        pokemonTableView.delegate = self
-        pokemonTableView.dataSource = self
-        searchBar.delegate = self
-        self.searchBar.searchBarStyle = .minimal
-
+      
     }
-
-
 }
 
+let cellName = "PokemonCell"
+let cellReuseIdentifier = "PokemonCell"
+
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return pokemonList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell", for: indexPath) as! PokemonCell
+        let target = pokemonList[indexPath.row]
+        
+        let img = UIImage(named: "\(target.image).jpg")
+        cell.pokemonImageView?.image = img
+        cell.nameLabel?.text = target.name
+        cell.selectionStyle = .none
+        cell.numberLabel?.text = String(target.number)
+        cell.backgroundColor = UIColor.systemGray6
         
         return cell
     }
@@ -55,3 +71,4 @@ extension ViewController: UISearchBarDelegate {
           
     }
 }
+
