@@ -53,15 +53,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = UIStoryboard(name: "DetailViewController", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         
-//        let target = pokemonList[indexPath.row]
-
-        
         detailViewController.pokemon = self.pokemonList[indexPath.row]
         
         print(detailViewController.pokemon!)
         
-        self.present(detailViewController, animated: true) {
-        }
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+
 
     }
     
