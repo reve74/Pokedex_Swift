@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
     
@@ -36,12 +37,12 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        requestAPI()
       
     }
 }
 
-let cellName = "PokemonCell"
-let cellReuseIdentifier = "PokemonCell"
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -76,6 +77,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    
+//    func requestAPI() {
+//        var request = AF.request("https://pokeapi.co/api/v2/pokemon", method: .get).responseJSON {
+//            response in
+//            print("Request: \(String(describing: response.request))")
+//            print("Response: \(String(describing: response.response))")
+//            print("Result: \(String(describing: response.result))")
+//        }
+//    }
+    
 }
 
 extension ViewController: UISearchBarDelegate {
