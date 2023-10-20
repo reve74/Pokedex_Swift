@@ -38,7 +38,4 @@ class PokemonAbilityView: UIView {
         }
     }
     
-    
-    
-    
 }
