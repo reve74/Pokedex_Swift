@@ -29,13 +29,16 @@ class DetailViewController: UIViewController {
         }
     }
     
-//    @IBOutlet weak var backgroundView: UIView! {
-//        didSet {
-//            backgroundView.layer.cornerRadius = 20
-//        }
-//    }
     
-//    @IBOutlet weak var pokemonAbilityView: PokemonAbilityView!
+    @IBOutlet weak var pokemonType: PokemonAbilityView!
+    
+    @IBOutlet weak var pokemonHeight: PokemonAbilityView!
+    
+    @IBOutlet weak var pokemonWeight: PokemonAbilityView!
+    
+    @IBOutlet weak var pokemonAbility: PokemonAbilityView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

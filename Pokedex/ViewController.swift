@@ -38,8 +38,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        requestAPI()
-      
     }
 }
 
@@ -79,14 +77,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-//    func requestAPI() {
-//        var request = AF.request("https://pokeapi.co/api/v2/pokemon", method: .get).responseJSON {
-//            response in
-//            print("Request: \(String(describing: response.request))")
-//            print("Response: \(String(describing: response.response))")
-//            print("Result: \(String(describing: response.result))")
-//        }
-//    }
     
 }
 
