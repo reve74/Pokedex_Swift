@@ -29,7 +29,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Moe-OU-gp1">
-                                                    <rect key="frame" x="100" y="10" width="260" height="85"/>
+                                                    <rect key="frame" x="80" y="10" width="273" height="85"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3LL-hO-6QS">
                                                             <rect key="frame" x="25" y="5" width="70" height="80"/>
@@ -58,7 +58,7 @@
                                                         <constraint firstItem="3LL-hO-6QS" firstAttribute="leading" secondItem="Moe-OU-gp1" secondAttribute="leading" constant="25" id="27c-43-dSv"/>
                                                         <constraint firstItem="dUX-v7-TY5" firstAttribute="leading" secondItem="3LL-hO-6QS" secondAttribute="trailing" constant="20" id="EHY-A3-Mdc"/>
                                                         <constraint firstItem="Gzg-Vd-bGt" firstAttribute="leading" secondItem="3LL-hO-6QS" secondAttribute="trailing" constant="20" id="Gz4-BL-7k6"/>
-                                                        <constraint firstAttribute="width" constant="260" id="KT8-Se-PW1"/>
+                                                        <constraint firstAttribute="width" constant="200" id="KT8-Se-PW1"/>
                                                         <constraint firstItem="3LL-hO-6QS" firstAttribute="top" secondItem="Moe-OU-gp1" secondAttribute="top" constant="5" id="bCC-ko-TpC"/>
                                                         <constraint firstAttribute="height" constant="90" id="g8Q-9T-twI"/>
                                                         <constraint firstItem="Gzg-Vd-bGt" firstAttribute="top" secondItem="Moe-OU-gp1" secondAttribute="top" constant="25" id="nW0-2c-3oZ"/>
@@ -69,8 +69,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Moe-OU-gp1" secondAttribute="bottom" constant="5" id="532-Xp-AMj"/>
-                                                <constraint firstItem="Moe-OU-gp1" firstAttribute="leading" secondItem="B1l-vH-apg" secondAttribute="leading" constant="100" id="BSt-jz-1g1"/>
+                                                <constraint firstItem="Moe-OU-gp1" firstAttribute="leading" secondItem="B1l-vH-apg" secondAttribute="leading" constant="80" id="BSt-jz-1g1"/>
                                                 <constraint firstItem="Moe-OU-gp1" firstAttribute="top" secondItem="B1l-vH-apg" secondAttribute="top" constant="10" id="Uzf-6Q-mye"/>
+                                                <constraint firstAttribute="trailing" secondItem="Moe-OU-gp1" secondAttribute="trailing" constant="40" id="vFf-IF-Zxg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

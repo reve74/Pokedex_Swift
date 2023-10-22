@@ -22,7 +22,6 @@
 		1253D69A2AE0E8D600EF4225 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1253D6992AE0E8D600EF4225 /* DetailViewController.swift */; };
 		1253D69C2AE0E90A00EF4225 /* DetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1253D69B2AE0E90A00EF4225 /* DetailViewController.storyboard */; };
 		1253D69E2AE103D400EF4225 /* PokemonAbilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1253D69D2AE103D400EF4225 /* PokemonAbilityView.swift */; };
-		1253D6A32AE204F200EF4225 /* PokemonAbilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1253D6A22AE204F200EF4225 /* PokemonAbilityCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +60,6 @@
 		1253D6992AE0E8D600EF4225 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1253D69B2AE0E90A00EF4225 /* DetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailViewController.storyboard; sourceTree = "<group>"; };
 		1253D69D2AE103D400EF4225 /* PokemonAbilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAbilityView.swift; sourceTree = "<group>"; };
-		1253D6A22AE204F200EF4225 /* PokemonAbilityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAbilityCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +156,6 @@
 			children = (
 				1253D6992AE0E8D600EF4225 /* DetailViewController.swift */,
 				1253D69B2AE0E90A00EF4225 /* DetailViewController.storyboard */,
-				1253D6A22AE204F200EF4225 /* PokemonAbilityCell.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -303,7 +300,6 @@
 			files = (
 				1253D6942AE0CD8800EF4225 /* Pokemon.swift in Sources */,
 				123697F32ADD130000573A1A /* ViewController.swift in Sources */,
-				1253D6A32AE204F200EF4225 /* PokemonAbilityCell.swift in Sources */,
 				1253D6912AE0CD5200EF4225 /* PokemonCell.swift in Sources */,
 				1253D69E2AE103D400EF4225 /* PokemonAbilityView.swift in Sources */,
 				1253D69A2AE0E8D600EF4225 /* DetailViewController.swift in Sources */,

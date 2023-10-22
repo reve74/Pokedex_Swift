@@ -19,23 +19,26 @@ class PokemonAbilityView: UIView {
         }
     }
     
-    @IBOutlet weak var iconImageView: UIImageView! {
-        didSet {
-            iconImageView.image = UIImage(named: "ability.png")
-            iconImageView.tintColor = .black
-        }
-    }
+    @IBOutlet weak var iconImageView: UIImageView!
+//    {
+//        didSet {
+//            iconImageView.image = UIImage(named: "ability.png")
+//            iconImageView.tintColor = .black
+//        }
+//    }
     
-    @IBOutlet weak var abilityTypeLabel: UILabel! {
-        didSet {
-            abilityTypeLabel.text = "Type"
-        }
-    }
+    @IBOutlet weak var abilityTypeLabel: UILabel!
+//    {
+//        didSet {
+//            abilityTypeLabel.text = "Type"
+//        }
+//    }
     
-    @IBOutlet weak var abilityLabel: UILabel! {
-        didSet {
-            abilityLabel.text = "Electric"
-        }
-    }
+    @IBOutlet weak var abilityLabel: UILabel!
+//    {
+//        didSet {
+//            abilityLabel.text = "Electric"
+//        }
+//    }
     
 }
