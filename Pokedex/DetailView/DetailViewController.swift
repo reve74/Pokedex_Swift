@@ -9,6 +9,9 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    
+//    var pokemonResult: 
+    
     var pokemon: Pokemon?
     
     var img: UIImage?

@@ -10,6 +10,12 @@ import Alamofire
 
 class ViewController: UIViewController {
     
+    var limit: Int?
+    
+    var allPokemonModel: AllPokemonModel?
+    
+    var resultModel: ResultModel?
+
     let pokemonList = Pokemon.data
     
     @IBOutlet weak var searchBar: UISearchBar! {
@@ -38,6 +44,44 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        requestAPI()
+
+    }
+    
+    func loadImage(urlString: String, completion: @escaping (UIImage?)-> Void){
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
+        
+        if let hasURL = URL(string: urlString) {
+            var request = URLRequest(url: hasURL)
+            request.httpMethod = "GET"
+            
+            session.dataTask(with: request) { data, response, error in
+                print((response as! HTTPURLResponse).statusCode)
+                
+                if let hasData = data {
+                    completion(UIImage(data: hasData))
+                    return
+                }
+            }.resume()
+            session.finishTasksAndInvalidate()
+        }
+        completion(nil)
+    }
+    
+}
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -46,38 +90,74 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemonList.count
+        return allPokemonModel?.results.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = UIStoryboard(name: "DetailViewController", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        
-        detailViewController.pokemon = self.pokemonList[indexPath.row]
-        
-        print(detailViewController.pokemon!)
-        
+
         self.navigationController?.pushViewController(detailViewController, animated: true)
-
-
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell", for: indexPath) as! PokemonCell
-        let target = pokemonList[indexPath.row]
         
-        let img = UIImage(named: "\(target.image).jpg")
-        cell.pokemonImageView?.image = img
-        cell.nameLabel?.text = target.name
+        let pokemonData = self.allPokemonModel?.results[indexPath.row]
+        cell.nameLabel.text = pokemonData?.name
+        cell.numberLabel.text = "#\(String(indexPath.row + 1))"
+
+        self.loadImage(urlString: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(indexPath.row + 1).png") { image in
+                DispatchQueue.main.async {
+                    cell.pokemonImageView.image = image
+                }
+            }
         cell.selectionStyle = .none
-        cell.numberLabel?.text = "No.\(String(target.number))"
         cell.backgroundColor = UIColor.systemGray6
-        
+
         return cell
     }
     
     
-    
+    func requestAPI() {
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
+        
+        var components = URLComponents(string: "https://pokeapi.co/api/v2/pokemon")
+        
+        let limit = URLQueryItem(name: "limit", value: String(50))
+        
+        components?.queryItems = [limit]
+        
+        guard let url = components?.url else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        let task = session.dataTask(with: request) { data, response, error in
+
+            if let hasData = data {
+                do {
+                    self.allPokemonModel =  try JSONDecoder().decode(AllPokemonModel.self, from: hasData)
+                    
+                    print(self.allPokemonModel ?? "No Data")
+ 
+                    DispatchQueue.main.async {
+                        self.pokemonTableView.reloadData()
+                    }
+                    
+                    
+                }catch {
+                    print(error)
+                }
+            }
+        }
+        
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
 }
 
 extension ViewController: UISearchBarDelegate {
