@@ -22,3 +22,22 @@ extension Pokemon {
         Pokemon(number: 5, name: "Piplup", image: "peng"),
     ]
 }
+
+
+struct AllPokemonModel: Codable {
+    let count: Int
+    let results: [ResultModel]
+}
+
+struct ResultModel: Codable {
+    let name: String
+    let url: String
+}
+
+
+struct PokemonModel: Codable {
+    let types: String
+    let abilities: [String]
+    let height: Int
+    let weight: Int
+}
