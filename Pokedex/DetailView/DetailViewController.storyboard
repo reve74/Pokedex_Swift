@@ -230,6 +230,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="abilityLabel" destination="OSz-3s-fBH" id="qM8-U5-baS"/>
+                        <outlet property="heightLabel" destination="6mb-7W-RZ5" id="EpP-ah-VKK"/>
                         <outlet property="nameLabel" destination="WkZ-nv-c1x" id="5HE-xw-xLq"/>
                         <outlet property="numberLabel" destination="lEQ-JV-afu" id="VwS-UA-Pc7"/>
                         <outlet property="pokemonAbility" destination="l6z-dM-Eoe" id="sZR-eL-G1q"/>
@@ -237,6 +239,8 @@
                         <outlet property="pokemonImageView" destination="FKb-6l-KLd" id="x5Q-Pc-CTt"/>
                         <outlet property="pokemonType" destination="iUh-hU-H3b" id="XX5-qc-SqW"/>
                         <outlet property="pokemonWeight" destination="maa-hc-50E" id="WTf-xh-bjN"/>
+                        <outlet property="typeLabel" destination="e7M-Ef-AXF" id="YTR-YU-ep2"/>
+                        <outlet property="widghtLabel" destination="Dlu-6V-BLR" id="6It-4J-cuh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
