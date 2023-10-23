@@ -7,21 +7,21 @@
 
 import UIKit
 
-struct Pokemon {
-    let number: Int
-    let name: String
-    let image: String
-}
-
-extension Pokemon {
-    static let data: [Pokemon] = [
-        Pokemon(number: 1, name: "Evevee", image: "eve"),
-        Pokemon(number: 2, name: "Pikachu", image: "pikachu"),
-        Pokemon(number: 3, name: "Hitokage", image: "hitokage"),
-        Pokemon(number: 4, name: "Metamong", image: "metamong"),
-        Pokemon(number: 5, name: "Piplup", image: "peng"),
-    ]
-}
+//struct Pokemon {
+//    let number: Int
+//    let name: String
+//    let image: String
+//}
+//
+//extension Pokemon {
+//    static let data: [Pokemon] = [
+//        Pokemon(number: 1, name: "Evevee", image: "eve"),
+//        Pokemon(number: 2, name: "Pikachu", image: "pikachu"),
+//        Pokemon(number: 3, name: "Hitokage", image: "hitokage"),
+//        Pokemon(number: 4, name: "Metamong", image: "metamong"),
+//        Pokemon(number: 5, name: "Piplup", image: "peng"),
+//    ]
+//}
 
 
 struct AllPokemonModel: Codable {
@@ -36,8 +36,28 @@ struct ResultModel: Codable {
 
 
 struct PokemonModel: Codable {
-    let types: String
-    let abilities: [String]
+    let types: [Types]
+    let abilities: [Abitity]
     let height: Int
     let weight: Int
 }
+
+struct Abitity: Codable {
+    let ability: abilityDetail
+}
+
+struct Types: Codable {
+    let slot: Int
+    let type: TypeDetail
+}
+
+struct TypeDetail: Codable {
+    let name: String
+    let url: String
+}
+
+struct abilityDetail: Codable {
+    let name: String
+    let url: String
+}
+

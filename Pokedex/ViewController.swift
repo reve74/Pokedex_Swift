@@ -15,8 +15,6 @@ class ViewController: UIViewController {
     var allPokemonModel: AllPokemonModel?
     
     var resultModel: ResultModel?
-
-    let pokemonList = Pokemon.data
     
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
@@ -30,7 +28,6 @@ class ViewController: UIViewController {
         }
     }
     
- 
     @IBOutlet weak var pokemonTableView: UITableView! {
         didSet {
             pokemonTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -45,7 +42,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         requestAPI()
-
     }
     
     func loadImage(urlString: String, completion: @escaping (UIImage?)-> Void){
@@ -57,7 +53,7 @@ class ViewController: UIViewController {
             request.httpMethod = "GET"
             
             session.dataTask(with: request) { data, response, error in
-                print((response as! HTTPURLResponse).statusCode)
+//                print((response as! HTTPURLResponse).statusCode)
                 
                 if let hasData = data {
                     completion(UIImage(data: hasData))
@@ -71,49 +67,45 @@ class ViewController: UIViewController {
     
 }
 
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
-}
-
-
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allPokemonModel?.results.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = UIStoryboard(name: "DetailViewController", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        
+        let index = indexPath.row + 1
+        let pokemonData = self.allPokemonModel?.results[indexPath.row]
 
+        
+        detailViewController.index = index
+        detailViewController.pokemonName = pokemonData?.name ?? ""
+        
+  
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell", for: indexPath) as! PokemonCell
         
         let pokemonData = self.allPokemonModel?.results[indexPath.row]
+        
+        let index = indexPath.row + 1
+        
         cell.nameLabel.text = pokemonData?.name
-        cell.numberLabel.text = "#\(String(indexPath.row + 1))"
+        cell.numberLabel.text = "#\(String(index))"
 
-        self.loadImage(urlString: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(indexPath.row + 1).png") { image in
+        self.loadImage(urlString: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(index).png") { image in
                 DispatchQueue.main.async {
                     cell.pokemonImageView.image = image
                 }
             }
         cell.selectionStyle = .none
         cell.backgroundColor = UIColor.systemGray6
+        
+        
+        
 
         return cell
     }
@@ -147,8 +139,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     DispatchQueue.main.async {
                         self.pokemonTableView.reloadData()
                     }
-                    
-                    
                 }catch {
                     print(error)
                 }
@@ -163,6 +153,30 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 extension ViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
           
+    }
+}
+
+
+extension UIImage {
+    func loadImage(urlString: String, completion: @escaping (UIImage?)-> Void){
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
+        
+        if let hasURL = URL(string: urlString) {
+            var request = URLRequest(url: hasURL)
+            request.httpMethod = "GET"
+            
+            session.dataTask(with: request) { data, response, error in
+                print((response as! HTTPURLResponse).statusCode)
+                
+                if let hasData = data {
+                    completion(UIImage(data: hasData))
+                    return
+                }
+            }.resume()
+            session.finishTasksAndInvalidate()
+        }
+        completion(nil)
     }
 }
 
