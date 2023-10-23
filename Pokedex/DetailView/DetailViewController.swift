@@ -16,8 +16,10 @@ class DetailViewController: UIViewController {
     
     var pokemonName = ""
     
-    var type: [String]?
+    var type : [String] = []
     
+    var abilities : [String] = []
+
     
     
     @IBOutlet weak var pokemonImageView: UIImageView!
@@ -96,8 +98,6 @@ class DetailViewController: UIViewController {
     func requestAPI(index: String) {
         var request = AF.request("https://pokeapi.co/api/v2/pokemon/\(index)", method: .get).responseJSON {
             response in
-
-            print("Result: \(String(describing: response.result))")
             
             switch response.result {
             case .success:
@@ -106,29 +106,32 @@ class DetailViewController: UIViewController {
                 do {
                     let decoder = JSONDecoder()
                     let json = try decoder.decode(PokemonModel.self, from: result)
-                    
-                    print("json \(json)")
+                    let abilities = json.abilities
 
-                    print("type : \(json.types[0].type.name)")
-//                    print("type : \(json.types[1].type.name)")
+                    for ability in abilities {
+                        self.abilities.append(ability.ability.name)
+                    }
+
+                    let types = json.types 
                     
-                    
-                    for i in 0..<json.types.count {
-                        self.type?.append(json.types[i].type.name)
-                        
-                        print(self.type)
-                        
-//                        result.append(try transform(self[i]))
-//                        formIndex(after: &i)
-                      }
-                    
+                    for type in types {
+
+                        self.type.append(type.type.name)
+                    }
                     
                     let height = json.height
                     let weight = json.weight
                     
-                    self.heightLabel.text = String(height)
-                    self.widghtLabel.text = String(weight)
-                    
+                    DispatchQueue.main.async {
+                        let typeString = self.type.joined(separator: ", ")
+                        let abilityString = self.abilities.joined(separator: ", ")
+                        
+                        self.abilityLabel.text = abilityString
+                        self.typeLabel.text = typeString
+                        
+                        self.heightLabel.text = String(height)
+                        self.widghtLabel.text = String(weight)
+                    }
                     
                 } catch {
                     print("error!\(error)")

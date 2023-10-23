@@ -37,13 +37,13 @@ struct ResultModel: Codable {
 
 struct PokemonModel: Codable {
     let types: [Types]
-    let abilities: [Abitity?]
+    let abilities: [Abitity]
     let height: Int
     let weight: Int
 }
 
 struct Abitity: Codable {
-    let name: String?
+    let ability: abilityDetail
 }
 
 struct Types: Codable {
@@ -55,3 +55,9 @@ struct TypeDetail: Codable {
     let name: String
     let url: String
 }
+
+struct abilityDetail: Codable {
+    let name: String
+    let url: String
+}
+
